@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CallerDb" Class="DcDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CallerDb;Integrated Security=True;Connect Timeout=30" SettingsObjectName="CallerId.Properties.Settings" SettingsPropertyName="CallerDbConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="NationalCode" Type="System.String" DbType="NVarChar(11) NOT NULL" CanBeNull="false" />
+      <Column Name="Fullname" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="FatherName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="IsAdmin" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(300) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Requt" Member="Requts">
+    <Type Name="Requt">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Call" Member="Calls">
+    <Type Name="Call">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="OperatorNationalCode" Type="System.String" DbType="NVarChar(11) NOT NULL" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CityName" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="RequestId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Report" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Function Name="dbo.Request_Delete" Method="Request_Delete">
+    <Parameter Name="Id" Parameter="id" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Request_Insert" Method="Request_Insert">
+    <Parameter Name="Title" Parameter="title" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Request_Update" Method="Request_Update">
+    <Parameter Name="Id" Parameter="id" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="Title" Parameter="title" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.User_Delete" Method="User_Delete">
+    <Parameter Name="NationalCode" Parameter="nationalCode" Type="System.String" DbType="NVarChar(11)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.User_Insert" Method="User_Insert">
+    <Parameter Name="NationalCode" Parameter="nationalCode" Type="System.String" DbType="NVarChar(11)" />
+    <Parameter Name="Fullname" Parameter="fullname" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="FatherName" Parameter="fatherName" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="IsAdmin" Parameter="isAdmin" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Password" Parameter="password" Type="System.String" DbType="NVarChar(300)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.User_Update" Method="User_Update">
+    <Parameter Name="prevNationalCode" Type="System.String" DbType="NVarChar(11)" />
+    <Parameter Name="newNationalCode" Type="System.String" DbType="NVarChar(11)" />
+    <Parameter Name="Fullname" Parameter="fullname" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="FatherName" Parameter="fatherName" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="IsAdmin" Parameter="isAdmin" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Password" Parameter="password" Type="System.String" DbType="NVarChar(300)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.User_Login" Method="User_Login">
+    <Parameter Name="NationalCode" Parameter="nationalCode" Type="System.String" DbType="NVarChar(11)" />
+    <Parameter Name="Password" Parameter="password" Type="System.String" DbType="NVarChar(300)" />
+    <ElementType Name="User_LoginResult">
+      <Column Name="Success" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Call_Insert" Method="Call_Insert">
+    <Parameter Name="Id" Parameter="id" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="OperatorNationalCode" Parameter="operatorNationalCode" Type="System.String" DbType="NVarChar(11)" />
+    <Parameter Name="FullName" Parameter="fullName" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="CityName" Parameter="cityName" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="RequestId" Parameter="requestId" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="Report" Parameter="report" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="Date" Parameter="date" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="PhoneNumber" Parameter="phoneNumber" Type="System.String" DbType="NVarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Call_Update" Method="Call_Update">
+    <Parameter Name="Id" Parameter="id" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="OperatorNationalCode" Parameter="operatorNationalCode" Type="System.String" DbType="NVarChar(11)" />
+    <Parameter Name="FullName" Parameter="fullName" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="CityName" Parameter="cityName" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="RequestId" Parameter="requestId" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="Report" Parameter="report" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="PhoneNumber" Parameter="phoneNumber" Type="System.String" DbType="NVarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Call_Record" Method="Call_Record">
+    <Parameter Name="Id" Parameter="id" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="RecordFile" Parameter="recordFile" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Call_Delete" Method="Call_Delete">
+    <Parameter Name="Id" Parameter="id" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>
